@@ -55,12 +55,13 @@ public class CrudDemo {
                 }
 
                 case 3 -> {
-                    System.out.println("********************************");
+
                     System.out.print("Enter the employeeId number to search: ");
                     employeeId = scanner.nextInt();
                     scanner.nextLine();
                     boolean found = false;
 
+                    System.out.println("********************************");
                     i = collection.iterator();
                     while (i.hasNext()){
                         e = i.next();
@@ -76,6 +77,31 @@ public class CrudDemo {
                         System.out.println("Record not found.");
                     }
 
+                }
+
+                case 4 -> {
+                    System.out.print("Enter employeeID to delete the record: ");
+                    employeeId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    boolean found = false;
+                    i = collection.iterator();
+                    while (i.hasNext()){
+                        e = i.next();
+                        if(e.getEmployeeId() == employeeId){
+                            i.remove();
+                            found = true;
+                            break;
+                        }
+                    }
+
+
+                    if(!found){
+                        System.out.println("Record not found!");
+                    }
+                    else{
+                        System.out.println("Record deleted successfully.");
+                    }
                 }
             }
 
