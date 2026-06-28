@@ -1,13 +1,10 @@
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class CrudDemo {
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
-        Collection<Employee> collection = new ArrayList<>();
+        List<Employee> collection = new ArrayList<>();
         Iterator<Employee> i;
         Employee e;
 
@@ -23,6 +20,7 @@ public class CrudDemo {
             System.out.println("3. Search");
             System.out.println("4. Delete");
             System.out.println("5. Update");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             choice = scanner.nextInt();
             scanner.nextLine();
@@ -103,9 +101,39 @@ public class CrudDemo {
                         System.out.println("Record deleted successfully.");
                     }
                 }
+
+                case 5 ->{
+                    System.out.print("Enter the employee Id to update the record: ");
+                    employeeId = scanner.nextInt();
+                    scanner.nextLine();
+
+                    boolean found = false;
+                    ListIterator<Employee> list = collection.listIterator();
+                    while (list.hasNext()){
+                        e = list.next();
+                        if(e.getEmployeeId() == employeeId){
+                            System.out.print("Enter new name: ");
+                            employeeName = scanner.nextLine();
+
+                            System.out.print("Enter new salary: ");
+                            employeeSalary = scanner.nextDouble();
+                            scanner.nextLine();
+                            found = true;
+
+                            list.set(new Employee(employeeId, employeeName, employeeSalary));
+                        }
+                    }
+                    if(!found){
+                        System.out.println("Record not found.");
+                    }
+                    else{
+                        System.out.println("Record updated successfully.");
+                    }
+
+                }
             }
 
-        }while (choice != 0);
+        }while (choice != 6);
 
 
 
