@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class CrudDemo {
@@ -7,8 +8,14 @@ public class CrudDemo {
 
         Scanner scanner = new Scanner(System.in);
         Collection<Employee> collection = new ArrayList<>();
+        Iterator<Employee> i;
+        Employee e;
 
         int choice;
+        int employeeId;
+        double employeeSalary;
+        String employeeName;
+
 
         do {
             System.out.println("1. Insert");
@@ -23,14 +30,14 @@ public class CrudDemo {
             switch (choice){
                 case 1 ->{
                     System.out.print("Enter the employee Id no: ");
-                    int employeeId = scanner.nextInt();
+                    employeeId = scanner.nextInt();
                     scanner.nextLine();
 
                     System.out.print("Enter the employee name: ");
-                    String employeeName = scanner.nextLine();
+                    employeeName = scanner.nextLine();
 
                     System.out.print("Enter the employee salary: ");
-                    double employeeSalary = scanner.nextDouble();
+                    employeeSalary = scanner.nextDouble();
                     scanner.nextLine();
 
                     collection.add(new Employee(employeeId, employeeName, employeeSalary));
@@ -39,10 +46,37 @@ public class CrudDemo {
 
                 case 2 -> {
                     System.out.println("********************************");
-                    System.out.println(collection);
+                    i = collection.iterator();
+                    while (i.hasNext()){
+                        e = i.next();
+                        System.out.println(e);
+                    }
                     System.out.println("********************************");
                 }
 
+                case 3 -> {
+                    System.out.println("********************************");
+                    System.out.print("Enter the employeeId number to search: ");
+                    employeeId = scanner.nextInt();
+                    scanner.nextLine();
+                    boolean found = false;
+
+                    i = collection.iterator();
+                    while (i.hasNext()){
+                        e = i.next();
+                        if(e.getEmployeeId() == employeeId){
+                            System.out.println(e);
+                            found = true;
+                            break;
+                        }
+                    }
+                    System.out.println("********************************");
+
+                    if(!found){
+                        System.out.println("Record not found.");
+                    }
+
+                }
             }
 
         }while (choice != 0);
